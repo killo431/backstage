@@ -41,7 +41,7 @@ jobs:
           node-version: 24.22.1
           registry-url: https://registry.npmjs.org/ # Needed for auth
 
-      - name: yarn install
+      - name: yarn install --immutable
         uses: backstage/actions/yarn-install@a9e1b58ad52aaf319264e18c3ff6887a4c824b52 # v0.7.13
         with:
           cache-prefix: ${{ runner.os }}-v${{ matrix.node-version }}
@@ -50,7 +50,7 @@ jobs:
         run: npx @backstage/create-app
         env:
           BACKSTAGE_APP_NAME: example-app
-          YARN_ENABLE_IMMUTABLE_INSTALLS: false
+          YARN_ENABLE_IMMUTABLE_INSTALLS: true
 
       - name: yarn build
         run: yarn build:backend
